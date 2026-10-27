@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BIZ } from "../config.js";
+import { YelpIcon } from "./Icons.jsx";
 
 export default function Reviews() {
   const [i, setI] = useState(0);
@@ -26,7 +27,7 @@ export default function Reviews() {
             fontWeight: "var(--font-heading-weight)",
             fontSize: 60,
             lineHeight: 0.6,
-            color: "var(--color-accent)",
+            color: "var(--color-leaf)",
             height: 28,
           }}
         >
@@ -63,10 +64,22 @@ export default function Reviews() {
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0" }}>
         <span style={{ fontSize: 13 }}>
-          <span style={{ color: "var(--color-accent)" }}>★★★★★</span> {BIZ.rating} from {BIZ.reviewCount} reviews
+          <span style={{ color: "var(--color-leaf)" }}>★★★★★</span>{" "}
+          {BIZ.rating ? `${BIZ.rating} from ${BIZ.reviewCount} reviews` : "Reviews from Google"}
         </span>
-        <a href={BIZ.googleUrl} style={{ fontSize: 13, fontWeight: 600 }}>On Google</a>
+        <span style={{ display: "flex", gap: 14 }}>
+          {BIZ.googleUrl && <a href={BIZ.googleUrl} style={{ fontSize: 13, fontWeight: 600 }}>On Google</a>}
+        </span>
       </div>
+      {BIZ.yelpUrl && (
+        <a href={BIZ.yelpUrl} target="_blank" rel="noopener" className="btn btn-secondary btn-wide" style={{ display: "flex", marginTop: 4 }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <YelpIcon size={20} />
+            See us on Yelp
+          </span>
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
     </section>
   );
 }

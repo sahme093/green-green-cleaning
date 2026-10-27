@@ -1,24 +1,25 @@
-/* Sage theme: muted green-gray, serif headings */
+/* Green Green Cleaning theme: leaf green from the logo, friendly rounded sans */
 :root {
-  --color-bg: #f3f3ee;
-  --color-surface: #e7e8df;
-  --color-text: #262823;
-  --color-divider: rgba(38, 40, 35, 0.2);
-  --color-accent: #5e6857;
-  --color-accent-100: #ecede6;
-  --color-accent-200: #dfe2d6;
-  --color-accent-300: #c8cdbd;
-  --color-accent-600: #4f5849;
-  --color-accent-700: #41483c;
-  --color-accent-800: #33382f;
-  --color-neutral-200: #e4e5dd;
-  --color-neutral-300: #d3d5ca;
-  --color-neutral-700: #62655c;
-  --color-neutral-800: #45483f;
-  --font-heading: "Newsreader", Georgia, serif;
-  --font-heading-weight: 500;
-  --font-body: "Hanken Grotesk", system-ui, sans-serif;
-  --page-max: 640px;
+  --color-bg: #f8faf5;
+  --color-surface: #eef4ea;
+  --color-text: #1c2b1e;
+  --color-divider: rgba(28, 43, 30, 0.16);
+  --color-accent: #2c7a33;
+  --color-accent-100: #e6f2e4;
+  --color-accent-200: #cfe6cc;
+  --color-accent-300: #9fcf9b;
+  --color-accent-600: #256a2b;
+  --color-accent-700: #1f5c25;
+  --color-accent-800: #16431b;
+  --color-leaf: #43ac49;
+  --color-neutral-200: #e3e9e0;
+  --color-neutral-300: #d0d8cc;
+  --color-neutral-700: #5b6659;
+  --color-neutral-800: #3e4a3c;
+  --font-heading: "Nunito", system-ui, sans-serif;
+  --font-heading-weight: 800;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+  --radius: 10px;
 }
 
 *,
@@ -94,7 +95,7 @@ h4 { font-size: 20px; }
   min-height: 44px;
   padding: 0 16px;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: var(--radius);
   font: inherit;
   font-weight: 600;
   font-size: 15px;
@@ -155,8 +156,8 @@ h4 { font-size: 20px; }
   min-height: 48px;
   padding: 0 12px;
   border: 1px solid var(--color-divider);
-  border-radius: 0;
-  background: var(--color-surface);
+  border-radius: var(--radius);
+  background: #fff;
   color: var(--color-text);
   font: inherit;
   font-size: 16px;
@@ -207,7 +208,9 @@ h4 { font-size: 20px; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--color-divider);
-  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
 }
 .seg-opt {
   position: relative;

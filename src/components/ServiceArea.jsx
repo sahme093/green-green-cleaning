@@ -45,7 +45,11 @@ export default function ServiceArea() {
         </p>
       )}
       <p className="muted" style={{ fontSize: 12, margin: "24px 0 0" }}>
-        {BIZ.name} · {BIZ.phone} · {BIZ.hours}
+        {BIZ.name} · <a href={`tel:${BIZ.phoneRaw}`}>{BIZ.phone}</a>
+        <br />
+        {BIZ.address}
+        <br />
+        {BIZ.hours}
       </p>
     </section>
   );

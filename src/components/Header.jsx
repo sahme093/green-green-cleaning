@@ -16,12 +16,13 @@ export default function Header() {
         background: "var(--color-bg)",
       }}
     >
+      {BIZ.logo && <img src={BIZ.logo} alt="" width="44" height="44" style={{ flex: "none", borderRadius: 8 }} />}
       <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0 }}>
         <span
           style={{
             fontFamily: "var(--font-heading)",
             fontWeight: "var(--font-heading-weight)",
-            fontSize: 16,
+            fontSize: 17,
             lineHeight: 1.15,
             letterSpacing: "-0.015em",
           }}

@@ -2,6 +2,7 @@ import { BIZ } from "../config.js";
 import Photo from "./Photo.jsx";
 
 const BADGES = [
+  ["ecoFriendly", "100% eco-friendly products"],
   ["insured", "Insured"],
   ["bonded", "Bonded"],
   ["backgroundChecked", "Background-checked"],
@@ -22,8 +23,8 @@ export default function Hero() {
           gap: 16,
         }}
       >
-        <span className="eyebrow">{BIZ.area}</span>
-        <h1 style={{ fontSize: 48, lineHeight: 0.98, letterSpacing: "-0.035em", color: "var(--color-bg)" }}>
+        <span className="eyebrow" style={{ fontWeight: 700 }}>{BIZ.area}</span>
+        <h1 style={{ fontSize: 44, lineHeight: 1.02, letterSpacing: "-0.03em", color: "var(--color-bg)" }}>
           {BIZ.tagline}
         </h1>
         {badges.length > 0 && (
@@ -47,19 +48,22 @@ export default function Hero() {
                   fontWeight: 600,
                 }}
               >
-                <span aria-hidden="true">✓</span>
+                <span aria-hidden="true" style={{ color: "var(--color-accent-200)" }}>✓</span>
                 <span style={{ fontSize: 15 }}>{title}</span>
               </li>
             ))}
           </ul>
         )}
       </section>
-      <div
-        className="grayscale"
-        style={{ height: 240, position: "relative", borderBottom: "2px solid var(--color-divider)" }}
-      >
-        <Photo src={BIZ.photos.hero} alt="A clean, bright room" placeholder="[Hero photo — a clean, bright room]" />
-      </div>
+      {BIZ.photos.hero ? (
+        <div style={{ height: 260, position: "relative", borderBottom: "4px solid var(--color-leaf)" }}>
+          <Photo src={BIZ.photos.hero} alt="A clean, bright room" />
+        </div>
+      ) : (
+        <div style={{ display: "grid", placeItems: "center", padding: "24px 16px", background: "#fff", borderBottom: "4px solid var(--color-leaf)" }}>
+          <img src="/logo.png" alt={`${BIZ.name} logo, 100% eco-friendly`} style={{ width: "min(260px, 70%)", height: "auto", display: "block" }} />
+        </div>
+      )}
     </>
   );
 }

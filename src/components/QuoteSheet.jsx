@@ -25,6 +25,24 @@ const STEPPERS = [
   ["baths", "Bathrooms", 1, 6],
 ];
 
+// Builds the text message that opens in the customer's messaging app.
+function quoteMessage(f) {
+  const svc = BIZ.services[f.service];
+  const freq = (FREQ.find((x) => x[0] === f.freq) || [0, ""])[1];
+  return [
+    `Quote request for ${BIZ.name}`,
+    `Service: ${svc ? svc.name : ""}`,
+    `How often: ${freq}`,
+    `Home: ${f.beds} bed, ${f.baths} bath${f.sqft ? ", " + f.sqft + " sq ft" : ""}`,
+    `Address: ${f.address}, ${f.zip}`,
+    `Name: ${f.name}`,
+    `Phone: ${f.phone}`,
+    `Email: ${f.email}`,
+  ].join("\n");
+}
+
+const smsHref = (f) => `sms:${BIZ.phoneRaw}?&body=${encodeURIComponent(quoteMessage(f))}`;
+
 function validate(f) {
   const e = {};
   if (f.service == null) e.service = "Choose a type of clean.";
@@ -100,7 +118,8 @@ export default function QuoteSheet({ open, form: f, setForm, onClose, onDone }) 
     } else {
       setErr({});
       setSent(true);
-      // TODO: send the request somewhere (email service, form backend, etc.)
+      // Opens the customer's messaging app with the quote details filled in.
+      window.location.href = smsHref(f);
     }
     scrollTop();
   };
@@ -194,6 +213,7 @@ export default function QuoteSheet({ open, form: f, setForm, onClose, onDone }) 
                       alignItems: "center",
                       gap: 12,
                       minHeight: 50,
+                      borderRadius: "var(--radius)",
                       padding: "10px 14px",
                       border: sel ? "2px solid var(--color-accent)" : "1px solid var(--color-divider)",
                       background: sel ? "var(--color-accent-100)" : "var(--color-surface)",
@@ -286,11 +306,11 @@ export default function QuoteSheet({ open, form: f, setForm, onClose, onDone }) 
             </Fieldset>
 
             <button type="submit" className="btn btn-primary btn-wide" style={{ minHeight: 54 }}>
-              <span>Send quote request</span>
+              <span>Text my quote request</span>
               <span aria-hidden="true">→</span>
             </button>
             <p className="muted" style={{ margin: "-10px 0 0", fontSize: 12 }}>
-              No payment needed. Prefer to talk? Call or text {BIZ.phone}.
+              Opens your messaging app with these details filled in. No payment needed. Prefer to talk? Call {BIZ.phone}.
             </p>
           </form>
         ) : (
@@ -310,8 +330,14 @@ export default function QuoteSheet({ open, form: f, setForm, onClose, onDone }) 
             >
               ✓
             </span>
-            <h2>Thanks, {f.name.trim().split(" ")[0]}. Your request is in.</h2>
-            <p style={{ margin: 0, fontSize: 15, color: "var(--color-neutral-800)" }}>{BIZ.responseTime}</p>
+            <h2>Almost done, {f.name.trim().split(" ")[0]}. Hit send in your messages.</h2>
+            <p style={{ margin: 0, fontSize: 15, color: "var(--color-neutral-800)" }}>
+              Your request is filled in and ready to text to {BIZ.phone}. {BIZ.responseTime}
+            </p>
+            <a href={smsHref(f)} className="btn btn-primary" style={{ minHeight: 48, justifyContent: "space-between" }}>
+              <span>Messages didn't open? Tap here</span>
+              <span aria-hidden="true">→</span>
+            </a>
             <table className="table">
               <tbody>
                 {summary.map(([k, v]) => (
